@@ -6,31 +6,59 @@
     <title>MANGA//SYNERGY - Duos & Trios</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #0b0b0d; color: #efefef; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px); background-size: 15px 15px; min-height: 100vh; overflow-x: hidden; }
-        nav { position: fixed; top: 0; left: 0; width: 100%; background-color: #121217; border-bottom: 3px solid #ff2a5f; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; }
+        body { background-color: #0b0b0d; color: #efefef; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-image: radial-gradient(rgba(255, 42, 95, 0.15) 1px, transparent 1px); background-size: 20px 20px; min-height: 100vh; overflow-x: hidden; }
+        nav { position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(18, 18, 23, 0.95); backdrop-filter: blur(8px); border-bottom: 3px solid #ff2a5f; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; }
         .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; color: #ffffff; text-shadow: 2px 2px 0px #ff2a5f; cursor: pointer; text-transform: uppercase; }
         .nav-links { display: flex; gap: 15px; }
-        .nav-btn { background: #1a1a22; border: 1px solid #333344; color: #ffffff; padding: 8px 16px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s ease; }
-        .nav-btn:hover { background: #ff2a5f; border-color: #ff2a5f; transform: translateY(-2px); }
+        .nav-btn { background: #1a1a22; border: 1px solid #ff2a5f; color: #ffffff; padding: 8px 16px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s ease; box-shadow: 2px 2px 0px #ff2a5f; }
+        .nav-btn:hover { background: #ff2a5f; color: #fff; transform: translateY(-2px); box-shadow: 4px 4px 0px #00e5ff; }
         .page { display: none; padding: 100px 5% 50px 5%; max-width: 1200px; margin: 0 auto; }
         .page.active { display: block; }
-        .hero { text-align: center; padding: 40px 10px; }
-        .hero h1 { font-size: 3.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: #ffffff; text-shadow: 4px 4px 0px #ff2a5f; }
-        .hero p { font-size: 1.1rem; max-width: 750px; margin: 0 auto 40px auto; color: #a0a0ab; line-height: 1.6; }
+        
+        /* HERO & SLIDER (OPTION B) */
+        .hero { text-align: center; padding: 20px 0 40px 0; }
+        .hero h1 { font-size: 3.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; color: #ffffff; text-shadow: 4px 4px 0px #ff2a5f, -2px -2px 0px #00e5ff; }
+        .hero p { font-size: 1.1rem; max-width: 800px; margin: 0 auto 30px auto; color: #a0a0ab; line-height: 1.6; }
+        
+        .carousel-container { position: relative; max-width: 900px; height: 420px; margin: 0 auto 50px auto; border: 3px solid #ffffff; box-shadow: 8px 8px 0px #ff2a5f, -8px -8px 0px #00e5ff; overflow: hidden; background: #15151c; }
+        .carousel-slide { display: none; width: 100%; height: 100%; position: relative; }
+        .carousel-slide.active { display: block; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.75); }
+        .carousel-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(11, 11, 13, 0.95)); padding: 30px 20px 20px 20px; text-align: left; }
+        .carousel-overlay h3 { font-size: 2rem; color: #ffffff; font-weight: 900; text-transform: uppercase; text-shadow: 2px 2px 0px #ff2a5f; }
+        .carousel-overlay p { color: #00e5ff; font-weight: 700; font-size: 1rem; margin-top: 5px; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(18, 18, 23, 0.8); border: 2px solid #ffffff; color: #fff; font-size: 1.5rem; width: 45px; height: 45px; cursor: pointer; z-index: 10; font-weight: 900; transition: all 0.2s; }
+        .carousel-btn:hover { background: #ff2a5f; border-color: #ff2a5f; }
+        .prev-btn { left: 15px; } .next-btn { right: 15px; }
+
+        /* MANGA COLLAGE (OPTION A) */
+        .collage-section-title { font-size: 2rem; font-weight: 900; text-transform: uppercase; margin: 40px 0 20px 0; text-align: center; color: #ffffff; letter-spacing: 2px; }
+        .collage-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 50px; padding: 10px; background: #121217; border: 2px dashed #ff2a5f; }
+        .collage-item { position: relative; height: 220px; overflow: hidden; border: 2px solid #ffffff; cursor: pointer; transition: all 0.3s ease; }
+        .collage-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .collage-item:hover { transform: scale(1.03) rotate(-1deg); border-color: #00e5ff; box-shadow: 0 0 15px rgba(0, 229, 255, 0.6); z-index: 5; }
+        .collage-item:hover img { transform: scale(1.15); }
+        .collage-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); padding: 5px 8px; font-size: 0.85rem; font-weight: 800; color: #fff; text-transform: uppercase; text-align: center; border-top: 1px solid #ff2a5f; }
+
+        /* SELECTION CARDS */
         .selection-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
-        .selection-card { background: #15151c; border: 2px solid #ffffff; width: 300px; padding: 30px 20px; text-align: center; cursor: pointer; box-shadow: 6px 6px 0px #ff2a5f; transition: all 0.2s ease; }
+        .selection-card { background: #15151c; border: 2px solid #ffffff; width: 320px; padding: 30px 20px; text-align: center; cursor: pointer; box-shadow: 6px 6px 0px #ff2a5f; transition: all 0.2s ease; }
         .selection-card:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0px #00e5ff; }
-        .selection-card h2 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; text-transform: uppercase; }
+        .selection-card h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; text-transform: uppercase; color: #ffffff; }
         .selection-card p { font-size: 0.95rem; color: #a0a0ab; }
+
+        /* HEADINGS & GRID */
         .page-title { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; border-left: 6px solid #ff2a5f; padding-left: 15px; }
         .page-subtitle { color: #a0a0ab; margin-bottom: 30px; font-size: 1rem; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .widget-card { background: #15151c; border: 2px solid #2a2a35; overflow: hidden; cursor: pointer; transition: all 0.2s ease; }
-        .widget-card:hover { transform: translateY(-6px); border-color: #ff2a5f; box-shadow: 0px 8px 20px rgba(255, 42, 95, 0.2); }
+        .widget-card:hover { transform: translateY(-6px); border-color: #ff2a5f; box-shadow: 0px 8px 20px rgba(255, 42, 95, 0.3); }
         .widget-card img { width: 100%; height: 350px; object-fit: cover; display: block; }
         .widget-info { padding: 15px; }
         .widget-info h3 { font-size: 1.4rem; margin-bottom: 6px; font-weight: 800; color: #ffffff; }
         .widget-info p { font-size: 0.9rem; color: #a0a0ab; line-height: 1.4; }
+
+        /* DETAIL PAGE */
         .back-btn { background: transparent; border: 2px solid #ffffff; color: #ffffff; padding: 8px 18px; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-bottom: 25px; }
         .back-btn:hover { background: #ffffff; color: #0b0b0d; }
         .detail-wrapper { display: flex; gap: 30px; flex-wrap: wrap; background: #15151c; border: 2px solid #ffffff; padding: 30px; box-shadow: 8px 8px 0px #ff2a5f; }
@@ -51,26 +79,83 @@
             <button class="nav-btn" onclick="showPage('trios')">Trios</button>
         </div>
     </nav>
+
+    <!-- HOME PAGE -->
     <div id="home" class="page active">
         <div class="hero">
             <h1>POWER OF BONDS</h1>
-            <p>In the world of dark manga and battle shonen, strength is rarely built in isolation. Whether bound by tragic fates, eternal rivalries, or unspoken brotherhood, duos and trios define the emotional weight and iconic battles of anime history.</p>
+            <p>Explore the legendary duos and trios that define anime and manga history through absolute trust, rivalries, and tragic fates.</p>
+
+            <!-- OPTION B: FEATURED ANIME CAROUSEL -->
+            <div class="carousel-container">
+                <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">❮</button>
+                <button class="carousel-btn next-btn" onclick="moveSlide(1)">❯</button>
+                
+                <div class="carousel-slide active" onclick="openDetail('ichigo-rukia')">
+                    <img src="13944.jpg" alt="Ichigo & Rukia">
+                    <div class="carousel-overlay">
+                        <h3>Ichigo & Rukia</h3>
+                        <p>"The substitute Soul Reaper & the noble officer who started it all."</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" onclick="openDetail('luffy-zoro')">
+                    <img src="13909.jpg" alt="Luffy & Zoro">
+                    <div class="carousel-overlay">
+                        <h3>Luffy & Zoro</h3>
+                        <p>"Nothing happened." — The ultimate bond of absolute captain loyalty.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" onclick="openDetail('naruto-sasuke')">
+                    <img src="13910.jpg" alt="Naruto & Sasuke">
+                    <div class="carousel-overlay">
+                        <h3>Naruto & Sasuke</h3>
+                        <p>"Light and Shadow—reincarnations bound across fate."</p>
+                    </div>
+                </div>
+                <div class="carousel-slide" onclick="openDetail('hayakawa-family')">
+                    <img src="13917.jpg" alt="Chainsaw Man Trio">
+                    <div class="carousel-overlay">
+                        <h3>Aki, Denji & Power</h3>
+                        <p>"A fragile makeshift family living inside a dark world."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPTION A: MANGA IMAGE COLLAGE -->
+            <div class="collage-section-title">⚡ FEATURED ALLIANCE GRID ⚡</div>
+            <div class="collage-container">
+                <div class="collage-item" onclick="openDetail('ichigo-rukia')"><img src="13944.jpg" alt="Ichigo Rukia"><div class="collage-label">Ichigo & Rukia</div></div>
+                <div class="collage-item" onclick="openDetail('luffy-zoro')"><img src="13909.jpg" alt="Luffy Zoro"><div class="collage-label">Luffy & Zoro</div></div>
+                <div class="collage-item" onclick="openDetail('naruto-sasuke')"><img src="13910.jpg" alt="Naruto Sasuke"><div class="collage-label">Naruto & Sasuke</div></div>
+                <div class="collage-item" onclick="openDetail('gon-killua')"><img src="13911.jpg" alt="Gon Killua"><div class="collage-label">Gon & Killua</div></div>
+                <div class="collage-item" onclick="openDetail('goku-vegeta')"><img src="13912.jpg" alt="Goku Vegeta"><div class="collage-label">Goku & Vegeta</div></div>
+                <div class="collage-item" onclick="openDetail('itadori-todo')"><img src="13913.jpg" alt="Itadori Todo"><div class="collage-label">Itadori & Todo</div></div>
+                <div class="collage-item" onclick="openDetail('kamaboko-squad')"><img src="13915.jpg" alt="Demon Slayer Trio"><div class="collage-label">Kamaboko Trio</div></div>
+                <div class="collage-item" onclick="openDetail('hayakawa-family')"><img src="13917.jpg" alt="Chainsaw Man Trio"><div class="collage-label">Public Safety Trio</div></div>
+            </div>
+
             <div class="selection-container">
-                <div class="selection-card" onclick="showPage('duos')"><h2>THE DUOS</h2><p>Two forces balancing light and shadow, rivalry, or absolute trust. Click to explore.</p></div>
-                <div class="selection-card" onclick="showPage('trios')"><h2>THE TRIOS</h2><p>Chaos, brotherhood, and dynamic balance. Click to explore legendary trios.</p></div>
+                <div class="selection-card" onclick="showPage('duos')"><h2>THE DUOS</h2><p>Click to explore complete legendary rivalries and pairs.</p></div>
+                <div class="selection-card" onclick="showPage('trios')"><h2>THE TRIOS</h2><p>Click to explore dynamic trios and chaotic brotherhoods.</p></div>
             </div>
         </div>
     </div>
+
+    <!-- DUOS PAGE -->
     <div id="duos" class="page">
         <h1 class="page-title">ICONIC MANGA DUOS</h1>
         <p class="page-subtitle">Click on any duo to read their full origin story, shared battles, and bond summary.</p>
         <div class="grid-container" id="duos-grid"></div>
     </div>
+
+    <!-- TRIOS PAGE -->
     <div id="trios" class="page">
         <h1 class="page-title">LEGENDARY MANGA TRIOS</h1>
         <p class="page-subtitle">Click on any trio to explore their story, chaos, and absolute synergy.</p>
         <div class="grid-container" id="trios-grid"></div>
     </div>
+
+    <!-- DETAIL PAGE -->
     <div id="detail" class="page">
         <button class="back-btn" onclick="goBack()">← Back</button>
         <div class="detail-wrapper" id="detail-content"></div>
@@ -193,6 +278,7 @@
         ];
 
         let lastPage = 'home';
+        let currentSlide = 0;
 
         function renderCards() {
             const duosContainer = document.getElementById('duos-grid');
@@ -219,6 +305,26 @@
                 }
             });
         }
+
+        // CAROUSEL LOGIC
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+
+            slides.forEach(s => s.classList.remove('active'));
+            slides[currentSlide].classList.add('active');
+        }
+
+        function moveSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        // Auto-play carousel every 4 seconds
+        setInterval(() => {
+            moveSlide(1);
+        }, 4000);
 
         function showPage(pageId) {
             const currentPage = document.querySelector('.page.active');
