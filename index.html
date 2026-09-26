@@ -6,38 +6,40 @@
     <title>MANGA//SYNERGY - Duos & Trios</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #0b0b0d; color: #efefef; font-family: 'Segoe UI', sans-serif; background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px); background-size: 15px 15px; min-height: 100vh; overflow-x: hidden; }
+        body { background-color: #0b0b0d; color: #efefef; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px); background-size: 15px 15px; min-height: 100vh; overflow-x: hidden; }
         nav { position: fixed; top: 0; left: 0; width: 100%; background-color: #121217; border-bottom: 3px solid #ff2a5f; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; }
-        .logo { font-size: 1.5rem; font-weight: 900; color: #ffffff; text-shadow: 2px 2px 0px #ff2a5f; cursor: pointer; text-transform: uppercase; }
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; color: #ffffff; text-shadow: 2px 2px 0px #ff2a5f; cursor: pointer; text-transform: uppercase; }
         .nav-links { display: flex; gap: 15px; }
-        .nav-btn { background: #1a1a22; border: 1px solid #333344; color: #ffffff; padding: 8px 16px; font-weight: 700; cursor: pointer; text-transform: uppercase; }
-        .nav-btn:hover { background: #ff2a5f; border-color: #ff2a5f; }
+        .nav-btn { background: #1a1a22; border: 1px solid #333344; color: #ffffff; padding: 8px 16px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s ease; }
+        .nav-btn:hover { background: #ff2a5f; border-color: #ff2a5f; transform: translateY(-2px); }
         .page { display: none; padding: 100px 5% 50px 5%; max-width: 1200px; margin: 0 auto; }
         .page.active { display: block; }
         .hero { text-align: center; padding: 40px 10px; }
-        .hero h1 { font-size: 3.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; color: #ffffff; text-shadow: 4px 4px 0px #ff2a5f; }
+        .hero h1 { font-size: 3.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: #ffffff; text-shadow: 4px 4px 0px #ff2a5f; }
         .hero p { font-size: 1.1rem; max-width: 750px; margin: 0 auto 40px auto; color: #a0a0ab; line-height: 1.6; }
         .selection-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
-        .selection-card { background: #15151c; border: 2px solid #ffffff; width: 300px; padding: 30px 20px; text-align: center; cursor: pointer; box-shadow: 6px 6px 0px #ff2a5f; }
-        .selection-card h2 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; }
+        .selection-card { background: #15151c; border: 2px solid #ffffff; width: 300px; padding: 30px 20px; text-align: center; cursor: pointer; box-shadow: 6px 6px 0px #ff2a5f; transition: all 0.2s ease; }
+        .selection-card:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0px #00e5ff; }
+        .selection-card h2 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; text-transform: uppercase; }
         .selection-card p { font-size: 0.95rem; color: #a0a0ab; }
         .page-title { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; border-left: 6px solid #ff2a5f; padding-left: 15px; }
-        .page-subtitle { color: #a0a0ab; margin-bottom: 30px; }
+        .page-subtitle { color: #a0a0ab; margin-bottom: 30px; font-size: 1rem; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .widget-card { background: #15151c; border: 2px solid #2a2a35; overflow: hidden; cursor: pointer; }
-        .widget-card:hover { border-color: #ff2a5f; }
+        .widget-card { background: #15151c; border: 2px solid #2a2a35; overflow: hidden; cursor: pointer; transition: all 0.2s ease; }
+        .widget-card:hover { transform: translateY(-6px); border-color: #ff2a5f; box-shadow: 0px 8px 20px rgba(255, 42, 95, 0.2); }
         .widget-card img { width: 100%; height: 350px; object-fit: cover; display: block; }
         .widget-info { padding: 15px; }
         .widget-info h3 { font-size: 1.4rem; margin-bottom: 6px; font-weight: 800; color: #ffffff; }
-        .widget-info p { font-size: 0.9rem; color: #a0a0ab; }
+        .widget-info p { font-size: 0.9rem; color: #a0a0ab; line-height: 1.4; }
         .back-btn { background: transparent; border: 2px solid #ffffff; color: #ffffff; padding: 8px 18px; font-weight: 700; cursor: pointer; text-transform: uppercase; margin-bottom: 25px; }
+        .back-btn:hover { background: #ffffff; color: #0b0b0d; }
         .detail-wrapper { display: flex; gap: 30px; flex-wrap: wrap; background: #15151c; border: 2px solid #ffffff; padding: 30px; box-shadow: 8px 8px 0px #ff2a5f; }
-        .detail-img { max-width: 400px; width: 100%; border: 2px solid #ffffff; object-fit: cover; }
+        .detail-img { max-width: 380px; width: 100%; border: 2px solid #ffffff; object-fit: cover; align-self: flex-start; }
         .detail-content { flex: 1; min-width: 280px; }
         .detail-tag { display: inline-block; background: #ff2a5f; color: #ffffff; padding: 4px 10px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; }
         .detail-content h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; color: #ffffff; }
-        .section-heading { font-size: 1.2rem; font-weight: 800; color: #00e5ff; margin-top: 22px; margin-bottom: 8px; text-transform: uppercase; border-bottom: 1px dashed #2a2a35; padding-bottom: 4px; }
-        .detail-content p { line-height: 1.7; color: #d1d1d6; font-size: 0.98rem; margin-bottom: 12px; }
+        .section-heading { font-size: 1.25rem; font-weight: 800; color: #00e5ff; margin-top: 25px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px dashed #2a2a35; padding-bottom: 6px; }
+        .detail-content p { line-height: 1.8; color: #d1d1d6; font-size: 1rem; margin-bottom: 15px; text-align: justify; }
     </style>
 </head>
 <body>
@@ -52,10 +54,10 @@
     <div id="home" class="page active">
         <div class="hero">
             <h1>POWER OF BONDS</h1>
-            <p>In the world of dark manga and battle shonen, strength is rarely built in isolation. Explore iconic duos and trios.</p>
+            <p>In the world of dark manga and battle shonen, strength is rarely built in isolation. Whether bound by tragic fates, eternal rivalries, or unspoken brotherhood, duos and trios define the emotional weight and iconic battles of anime history.</p>
             <div class="selection-container">
-                <div class="selection-card" onclick="showPage('duos')"><h2>THE DUOS</h2><p>Two forces balancing light and shadow. Click to explore.</p></div>
-                <div class="selection-card" onclick="showPage('trios')"><h2>THE TRIOS</h2><p>Chaos, brotherhood, and dynamic balance. Click to explore.</p></div>
+                <div class="selection-card" onclick="showPage('duos')"><h2>THE DUOS</h2><p>Two forces balancing light and shadow, rivalry, or absolute trust. Click to explore.</p></div>
+                <div class="selection-card" onclick="showPage('trios')"><h2>THE TRIOS</h2><p>Chaos, brotherhood, and dynamic balance. Click to explore legendary trios.</p></div>
             </div>
         </div>
     </div>
@@ -75,52 +77,188 @@
     </div>
         <script>
         const cardsData = [
-            { id: 'luffy-zoro', type: 'duo', title: 'Luffy & Zoro', series: 'One Piece', image: '13909.jpg', summary: 'The Captain and his First Mate—an unbreakable bond of absolute loyalty.', howTheyMet: 'Luffy first encountered Zoro tied to a wooden stake at Shells Town base. Impressed by Zoro\'s unyielding spirit, Luffy stole Zoro\'s swords back from the Marines and invited him to join.', keyEvents: 'They survived the Grand Line and took on the World Government. At Thriller Bark, Zoro secretly absorbed all of Luffy\'s pain from Kuma, famously declaring "Nothing happened."', whySpecial: 'They share absolute faith in each other\'s dreams without question.' },
-            { id: 'naruto-sasuke', type: 'duo', title: 'Naruto & Sasuke', series: 'Naruto', image: '13910.jpg', summary: 'The definitive rivalry between light and darkness across generations.', howTheyMet: 'Assigned together in Team 7, Naruto was the orphaned outcast seeking recognition, while Sasuke was the traumatized prodigy seeking vengeance.', keyEvents: 'Their paths diverged at the Valley of the End, but they fought together in the Fourth Shinobi World War to seal Kaguya, ending their final battle by severing each other\'s dominant arms.', whySpecial: 'Their bond represents the triumph of relentless brotherhood over hatred.' },
-            { id: 'gon-killua', type: 'duo', title: 'Gon & Killua', series: 'Hunter x Hunter', image: '13911.jpg', summary: 'Light and shadow—a bright hunter and a trained assassin.', howTheyMet: 'They met during the endurance run of the 287th Hunter Exam, instantly bonding despite their opposite backgrounds.', keyEvents: 'Together they trained in Greed Island and faced the Chimera Ants, where Killua risked everything to save Gon from psychological devastation.', whySpecial: 'Gon gave Killua humanity beyond killing, while Killua became Gon\'s protector.' },
-            { id: 'goku-vegeta', type: 'duo', title: 'Goku & Vegeta', series: 'Dragon Ball', image: '13912.jpg', summary: 'Saiyan rivals who constantly break godlike boundaries together.', howTheyMet: 'Vegeta came to Earth as a ruthless Saiyan Prince intent on slaughtering Goku and securing immortality.', keyEvents: 'Their rivalry shifted into an alliance against Frieza, Cell, and Buu, eventually breaking divine limits together in the Tournament of Power.', whySpecial: 'Their endless push to surpass each other forces both into godlike transformations.' },
-            { id: 'itadori-todo', type: 'duo', title: 'Itadori & Todo', series: 'Jujutsu Kaisen', image: '13913.jpg', summary: 'Self-proclaimed brothers whose combat rhythm is unmatched.', howTheyMet: 'They met as opponents in the Goodwill Event. When Yuji shared Todo\'s taste in women, Todo fabricated memories of them as childhood best friends.', keyEvents: 'Todo coached Yuji mid-battle to master the Black Flash and tag-teamed Mahito during the Shibuya Incident using Boogie Woogie.', whySpecial: 'Todo acts as Yuji\'s mental pillar, creating an unstoppable combat team.' },
-            { id: 'hayakawa-family', type: 'trio', title: 'Aki, Denji & Power', series: 'Chainsaw Man', image: '13917.jpg', summary: 'A tragic, chaotic family unit living together under Public Safety.', howTheyMet: 'Aki was assigned by Makima to supervise Denji and Power, initially despising their chaotic habits.', keyEvents: 'Living in a small apartment turned their arrangement into a real home. They survived brutal devil attacks, bonding over shared trauma.', whySpecial: 'In a dark world, this makeshift family offered each other genuine love and warmth.' },
-            { id: 'karasuno-trio', type: 'trio', title: 'Hinata, Kageyama & Tsukishima', series: 'Haikyu!!', image: '13916.jpg', summary: 'First-years who drive Karasuno\'s volleyball evolution through rivalry.', howTheyMet: 'Hinata and Kageyama were middle school rivals before joining Karasuno together, where they met the cynical blocker Tsukishima.', keyEvents: 'Hinata and Kageyama created the "Freak Quick" attack, while Tsukishima\'s blocking defeated Shiratorizawa.', whySpecial: 'Their contrasting styles force Karasuno to constantly evolve.' },
-            { id: 'kamaboko-squad', type: 'trio', title: 'Tanjiro, Zenitsu & Inosuke', series: 'Demon Slayer', image: '13915.jpg', summary: 'Demon Slayers who fight together through sheer willpower and heart.', howTheyMet: 'Tanjiro met Zenitsu on a roadside and Inosuke at the Tsuzumi Mansion.', keyEvents: 'They fought through the Mugen Train, Entertainment District, and Infinity Castle arcs together.', whySpecial: 'Tanjiro anchors Inosuke\'s wildness and Zenitsu\'s fear, forming an unbreakable brotherhood.' },
-            { id: 'origin-trio', type: 'trio', title: 'Deku, Bakugo & Todoroki', series: 'My Hero Academia', image: '13914.jpg', summary: 'The top three UA students destined to lead hero society.', howTheyMet: 'They were brought together in UA Class 1-A under Eraser Head.', keyEvents: 'They interned under Endeavor and fought together against Shigaraki and All For One.', whySpecial: 'They represent the three pillars of heroism: saving, winning, and overcoming trauma.' }
+            // DUOS
+            {
+                id: 'ichigo-rukia',
+                type: 'duo',
+                title: 'Ichigo & Rukia',
+                series: 'Bleach',
+                image: '13944.jpg',
+                summary: 'The substitute Soul Reaper and the noble officer who started it all.',
+                howTheyMet: 'Their fateful encounter occurred late at night in Karakura Town when Rukia Kuchiki barged into Ichigo Kurosaki\'s bedroom while hunting a Hollow. Astounded that a regular human teenager could see, touch, and even kick her in Soul Reaper form, Rukia was caught off guard when a monstrous Hollow attacked Ichigo\'s family. Badly wounded while protecting him, Rukia made the illegal decision to transfer a portion of her Shinigami powers into Ichigo. Instead of taking a small fraction, Ichigo inadvertently absorbed almost all of her power due to his massive spiritual pressure, unlocking his iconic giant Zanpakuto and starting his journey.',
+                keyEvents: 'When Rukia was arrested by her brother Byakuya and sentenced to execution in the Soul Society for sharing her powers with a human, Ichigo underwent grueling training with Kisuke Urahara to unlock Bankai. He invaded the Soul Society, fought his way through Captains, and famously shattered her execution platform at the Sokyoku Hill to rescue her. Later, during the Arrancar and Hueco Mundo arcs, Rukia returned the favor by bringing Ichigo out of his deep despair, giving him the mental resolve required to fight Grimmjow, Ulquiorra, and eventually Aizen.',
+                whySpecial: 'Ichigo and Rukia share an irreplaceable bond of mutual salvation and profound emotional support—she is explicitly referred to as the light that stopped the rain in his heart. Whenever Ichigo loses his resolve or falls into self-doubt, Rukia is the only person capable of snapping him back to reality through her tough-love speeches and unwavering faith. Their dynamic is built on absolute trust, comedic bantering, and an unspoken understanding that neither will ever abandon the other, regardless of the realm or danger.'
+            },
+            {
+                id: 'luffy-zoro',
+                type: 'duo',
+                title: 'Luffy & Zoro',
+                series: 'One Piece',
+                image: '13909.jpg',
+                summary: 'The Captain and his First Mate—an unbreakable bond of absolute loyalty.',
+                howTheyMet: 'Luffy first encountered Zoro tied to a wooden post at the Shells Town Marine Base, starving to death after taking the fall for a local girl. Impressed by Zoro\'s unyielding spirit, Luffy retrieved Zoro\'s three swords from Helmeppo and forced him to join his crew or face execution. Zoro agreed, promising to cut Luffy down if he ever got in the way of his dream to become the World\'s Greatest Swordsman, but quickly realized Luffy\'s unshakeable charisma.',
+                keyEvents: 'Together they survived the Grand Line, took on the World Government at Enies Lobby, and faced down Yonkos in Wano. Their ultimate defining moment took place at Thriller Bark: after Luffy passed out from exhaustion, Bartholomew Kuma offered to spare the crew if they handed over Luffy. Zoro begged to take Luffy\'s place, absorbing all of Luffy\'s agonizing pain and fatigue into his own body. When Sanji found him covered in blood, Zoro famously uttered the legendary line: "Nothing happened."',
+                whySpecial: 'They share absolute, unquestioning faith in each other\'s strength and ambitions. Zoro is the steadfast pillar who keeps Luffy\'s cheerful nature grounded in harsh realities, serving as the ultimate enforcer when the crew\'s discipline is tested. Luffy, on the other hand, trusts Zoro completely to handle any threat without ever looking back, forming the absolute backbone of the Straw Hat Pirates.'
+            },
+            {
+                id: 'naruto-sasuke',
+                type: 'duo',
+                title: 'Naruto & Sasuke',
+                series: 'Naruto',
+                image: '13910.jpg',
+                summary: 'The definitive rivalry between light and darkness across generations.',
+                howTheyMet: 'Assigned together under Kakashi Hatake in Team 7 alongside Sakura, Naruto and Sasuke were polar opposites from childhood. Naruto was the orphaned, talentless outcast who acted out for attention, while Sasuke was the traumatized prodigy bent solely on destroying his brother Itachi for wiping out the Uchiha clan. Their shared solitude created an unspoken recognition between them that blossomed into an intense rivalry during the Land of Waves mission.',
+                keyEvents: 'Their paths diverged drastically after the Chunin Exams when Sasuke abandoned Konoha seeking Orochimaru\'s forbidden power. Naruto spent years chasing Sasuke, leading to iconic battles at the Valley of the End. They eventually reunited during the Fourth Shinobi World War to defeat Obito, Madara, and seal Kaguya Otsutsuki. Their feud culminated in one final brutal fight at the Valley of the End, where both lost their dominant arms before Sasuke finally acknowledged Naruto\'s bond.',
+                whySpecial: 'They represent the ancient conflict between Asura and Indra—the endless cycle of hatred and redemption. Naruto\'s refusal to give up on Sasuke, despite the entire world branding him a criminal, proved that genuine bonds can overcome destiny and trauma. They complete each other as the shadow Hokage and the public leader protecting the ninja world.'
+            },
+            {
+                id: 'gon-killua',
+                type: 'duo',
+                title: 'Gon & Killua',
+                series: 'Hunter x Hunter',
+                image: '13911.jpg',
+                summary: 'Light and shadow—a bright hunter and a trained assassin.',
+                howTheyMet: 'They met during the intense endurance run in the first phase of the 287th Hunter Exam. Running side-by-side, the optimistic, nature-raised Gon instantly hit it off with Killua, who was riding a skateboard. Killua, having spent his entire life undergoing brutal torture and assassin training under the Zoldyck family, was astonished to find a boy his own age who treated him normally without fear or hidden motives.',
+                keyEvents: 'Together they conquered Heaven\'s Arena, learned Nen under Wing, cleared the lethal card game inside Greed Island, and faced the nightmare of the Chimera Ants. During the Chimera Ant arc, Gon descended into consumed rage over Kite\'s death, sacrificing his lifespan for godlike power. Killua risked his own life and defied his terrifying family to use his sibling Alluka\'s reality-warping powers to heal Gon from near death.',
+                whySpecial: 'Their friendship is a delicate, emotionally complex study of light and shadow. Gon\'s pure, unwavering nature gave Killua a reason to break free from his family\'s murderous control and enjoy youth. Conversely, Killua\'s analytical caution repeatedly kept Gon alive. Their deep emotional connection and eventual bittersweet parting remain one of the most celebrated dynamic developments in anime history.'
+            },
+            {
+                id: 'goku-vegeta',
+                type: 'duo',
+                title: 'Goku & Vegeta',
+                series: 'Dragon Ball',
+                image: '13912.jpg',
+                summary: 'Saiyan rivals who constantly break godlike boundaries together.',
+                howTheyMet: 'Vegeta first arrived on Earth as a ruthless, arrogant Saiyan Prince intent on exterminating humanity and securing immortality via the Dragon Balls. Goku, a low-class Saiyan raised on Earth, stood against him in a legendary, earth-shattering battle. Goku barely survived through assistance from his friends, but insisted on letting Vegeta escape so they could battle again in the future.',
+                keyEvents: 'Their hostile rivalry evolved into a fierce warrior alliance on Planet Namek against Frieza, and later against Cell and Majin Buu. To stop Super Buu, they put aside their pride and fused into Vegito using the Potara earrings, and later into Gogeta. In Dragon Ball Super, they trained together under the Angel Whis, unlocking God Ki, Super Saiyan Blue, Ultra Instinct, and Ultra Ego to defend the multiverse.',
+                whySpecial: 'They are the gold standard of modern shonen rivalries. Goku\'s easygoing obsession with pushing his physical limits directly conflicts with Vegeta\'s fierce, pride-driven royalty. Yet, this exact friction drives both to constantly break through unthinkable barriers. They trust each other to protect their families and the universe, even when refusing to admit their mutual respect out loud.'
+            },
+            {
+                id: 'itadori-todo',
+                type: 'duo',
+                title: 'Itadori & Todo',
+                series: 'Jujutsu Kaisen',
+                image: '13913.jpg',
+                summary: 'Self-proclaimed brothers whose combat rhythm is unmatched.',
+                howTheyMet: 'They met as enemy combatants during the Kyoto Goodwill Event. Before attacking Yuji, Aoi Todo asked him his mandatory question: "What type of woman is your taste?" When Yuji answered that he liked tall girls with big asses (specifically mentioning Jennifer Lawrence), Todo experienced a instantaneous brain-blast of fake memories where he and Yuji were lifelong best friends, declaring Yuji his "Brother."',
+                keyEvents: 'During their fight against the special-grade curse Hanami, Todo took on a teacher role, guiding Yuji on how to control his cursed energy and unlock the elusive Black Flash. During the Shibuya Incident, when Yuji was completely broken emotionally by Nanami\'s death and Nobara\'s defeat, Todo arrived on the scene to give a legendary pep talk before joining Yuji to destroy Mahito using his Boogie Woogie swapping technique.',
+                whySpecial: 'Despite the utterly hilarious and absurd way their friendship began, their battlefield synergy is unmatched in the sorcery world. Todo acts as Yuji\'s emotional backbone and tactical genius, while Yuji provides raw physical power. Together, their dynamic switching speed leaves special-grade curses completely helpless.'
+            },
+
+            // TRIOS
+            {
+                id: 'hayakawa-family',
+                type: 'trio',
+                title: 'Aki, Denji & Power',
+                series: 'Chainsaw Man',
+                image: '13917.jpg',
+                summary: 'A tragic, chaotic family unit living together under Public Safety.',
+                howTheyMet: 'Senior Devil Hunter Aki Hayakawa was ordered by Makima to take full responsibility for Denji (a human-chainsaw hybrid) and Power (the chaotic Blood Fiend). Initially, Aki viewed them as annoying, disgusting nuisances who lacked basic hygiene and manners, frequently getting into physical arguments over food, bathroom duties, and daily chores in their shared apartment.',
+                keyEvents: 'Through dangerous Public Safety operations against the Leech Devil, Eternity Devil, and Katana Man, their forced cohabitation softened into genuine familial love. They spent quiet mornings together cooking, celebrating small wins, and looking out for each other. When the Gun Devil arc began, Aki gave up his life\'s quest for vengeance specifically to ask Makima to protect Denji and Power from death.',
+                whySpecial: 'Their dynamic represents a fragile sanctuary of warmth hidden inside a bleak, horrific world. Denji and Power—who had never experienced human love—found a true older brother in Aki, while Aki found a reason to live beyond trauma. Their story is a deeply tragic, beautiful reflection on the bonds of chosen family.'
+            },
+            {
+                id: 'karasuno-trio',
+                type: 'trio',
+                title: 'Hinata, Kageyama & Tsukishima',
+                series: 'Haikyu!!',
+                image: '13916.jpg',
+                summary: 'First-years who drive Karasuno\'s volleyball evolution through intense rivalry.',
+                howTheyMet: 'Shoyo Hinata and Tobio Kageyama started as bitter middle school rivals after Kageyama\'s team crushed Hinata\'s in their first tournament match. They were shocked to discover they both enrolled at Karasuno High. Upon joining the team, they were immediately confronted by Kei Tsukishima, a tall, sarcastic blocker who mocked Kageyama\'s "King of the Court" title and Hinata\'s short stature.',
+                keyEvents: 'To earn their spot on the team, Hinata and Kageyama developed the legendary "Freak Quick"—an impossible fast attack relying on Kageyama\'s pinpoint setting and Hinata\'s blind jumping speed. Tsukishima, initially cynical and detached from volleyball, underwent massive growth during the Tokyo Training Camp and delivered Karasuno\'s victory by blocking Ushijima from Shiratorizawa Academy.',
+                whySpecial: 'They represent three distinct pillars of Karasuno\'s athletic growth: Hinata\'s unstoppable passion and instinct, Kageyama\'s perfectionist genius, and Tsukishima\'s sharp tactical intellect. Their continuous internal clashes force each of them to evolve, turning Karasuno from fallen champions back into national contenders.'
+            },
+            {
+                id: 'kamaboko-squad',
+                type: 'trio',
+                title: 'Tanjiro, Zenitsu & Inosuke',
+                series: 'Demon Slayer',
+                image: '13915.jpg',
+                summary: 'Demon Slayers who fight together through sheer willpower and heart.',
+                howTheyMet: 'Tanjiro Kamado met Zenitsu Agatsuma clinging to a woman on a roadside, terrified of dying on his next mission. Shortly after, they encountered Inosuke Hashibira—a wild boy wearing a hollowed-out boar mask—inside the drum-demon\'s mansion. Inosuke initially attacked Tanjiro and tried to stomp on Nezuko\'s box, but Tanjiro\'s unbelievable headbutt and gentle kindness earned Inosuke\'s fierce respect.',
+                keyEvents: 'They recovered together at the Wisteria House, mastered Total Concentration Constant breathing at the Butterfly Mansion, and fought through horrifying battles in the Mugen Train, Entertainment District, and Swordsmith Village. During the final battle in the Infinity Castle against Muzan Kibutsuji, their combined breaths and coordinated assault proved vital to holding the line.',
+                whySpecial: 'Tanjiro acts as the emotionally mature older brother who calms Zenitsu\'s overwhelming panic attacks and redirect\'s Inosuke\'s violent instincts into constructive teamwork. In return, Zenitsu and Inosuke protect Tanjiro and Nezuko with their lives. Their shared laughter, meals, and intense battles form an ironclad brotherhood.'
+            },
+            {
+                id: 'origin-trio',
+                type: 'trio',
+                title: 'Deku, Bakugo & Todoroki',
+                series: 'My Hero Academia',
+                image: '13914.jpg',
+                summary: 'The top three UA students destined to lead hero society.',
+                howTheyMet: 'Izuku Midoriya (Deku) and Katsuki Bakugo grew up together in the same neighborhood, where Bakugo bullied Deku for being quirkless. Shoto Todoroki entered Class 1-A at UA High as an elite recommended student, cold and distant due to his abusive upbringing by Endeavor. The three were brought together under Eraser Head\'s rigorous hero curriculum.',
+                keyEvents: 'Deku shattered Todoroki\'s emotional walls during their legendary fight at the UA Sports Festival, forcing Shoto to embrace his fire powers. Later, all three interned together under the Number One Hero Endeavor, mastering high-speed multi-tasking combat. During the final war against Shigaraki and All For One, they fought as the vanguard pushing back absolute evil.',
+                whySpecial: 'They represent the three core tenets of what it means to be a hero: Deku\'s selfless impulse to save others, Bakugo\'s uncompromising drive to win, and Todoroki\'s journey to overcome trauma. Together, their competing ideals and mutual respect make them the unstoppable future leaders of hero society.'
+            }
         ];
 
         let lastPage = 'home';
+
         function renderCards() {
             const duosContainer = document.getElementById('duos-grid');
             const triosContainer = document.getElementById('trios-grid');
-            duosContainer.innerHTML = ''; triosContainer.innerHTML = '';
+            duosContainer.innerHTML = ''; 
+            triosContainer.innerHTML = '';
+
             cardsData.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'widget-card';
                 card.onclick = () => openDetail(item.id);
-                card.innerHTML = `<img src="${item.image}" alt="${item.title}"><div class="widget-info"><h3>${item.title}</h3><p>${item.summary}</p></div>`;
-                if (item.type === 'duo') { duosContainer.appendChild(card); } else { triosContainer.appendChild(card); }
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="widget-info">
+                        <h3>${item.title}</h3>
+                        <p>${item.summary}</p>
+                    </div>
+                `;
+
+                if (item.type === 'duo') {
+                    duosContainer.appendChild(card);
+                } else {
+                    triosContainer.appendChild(card);
+                }
             });
         }
+
         function showPage(pageId) {
             const currentPage = document.querySelector('.page.active');
-            if (currentPage && currentPage.id !== 'detail') { lastPage = currentPage.id; }
+            if (currentPage && currentPage.id !== 'detail') {
+                lastPage = currentPage.id;
+            }
+
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
         }
-        function goBack() { showPage(lastPage); }
+
+        function goBack() {
+            showPage(lastPage);
+        }
+
         function openDetail(id) {
             const item = cardsData.find(c => c.id === id);
             if (!item) return;
+
             document.getElementById('detail-content').innerHTML = `
                 <img src="${item.image}" alt="${item.title}" class="detail-img">
                 <div class="detail-content">
                     <span class="detail-tag">${item.series} • ${item.type}</span>
                     <h2>${item.title}</h2>
-                    <div class="section-heading">How They Met</div><p>${item.howTheyMet}</p>
-                    <div class="section-heading">Key Battles & Shared Events</div><p>${item.keyEvents}</p>
-                    <div class="section-heading">What Makes Their Bond Special</div><p>${item.whySpecial}</p>
-                </div>`;
+                    
+                    <div class="section-heading">How They Met</div>
+                    <p>${item.howTheyMet}</p>
+                    
+                    <div class="section-heading">Key Battles & Shared Events</div>
+                    <p>${item.keyEvents}</p>
+
+                    <div class="section-heading">What Makes Their Bond Special</div>
+                    <p>${item.whySpecial}</p>
+                </div>
+            `;
+
             showPage('detail');
         }
+
         renderCards();
     </script>
 </body>
