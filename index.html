@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANGA//SYNERGY - Duos & Trios</title>
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0b0b0d;
+            color: #efefef;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 15px 15px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #121217;
+            border-bottom: 3px solid #ff2a5f;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 2px 2px 0px #ff2a5f;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: #1a1a22;
+            border: 1px solid #333344;
+            color: #ffffff;
+            padding: 8px 16px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #ff2a5f;
+            border-color: #ff2a5f;
+            transform: translateY(-2px);
+        }
+
+        /* PAGE SECTIONS */
+        .page {
+            display: none;
+            padding: 100px 5% 50px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* HOME / HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 40px 10px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 4px 4px 0px #ff2a5f;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 750px;
+            margin: 0 auto 40px auto;
+            color: #a0a0ab;
+            line-height: 1.6;
+        }
+
+        .selection-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .selection-card {
+            background: #15151c;
+            border: 2px solid #ffffff;
+            width: 300px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 6px 6px 0px #ff2a5f;
+            transition: all 0.2s ease;
+        }
+
+        .selection-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0px #00e5ff;
+        }
+
+        .selection-card h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .selection-card p {
+            font-size: 0.95rem;
+            color: #a0a0ab;
+        }
+
+        /* HEADINGS */
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            border-left: 6px solid #ff2a5f;
+            padding-left: 15px;
+        }
+
+        .page-subtitle {
+            color: #a0a0ab;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* GRID SYSTEM */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .widget-card {
+            background: #15151c;
+            border: 2px solid #2a2a35;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .widget-card:hover {
+            transform: translateY(-6px);
+            border-color: #ff2a5f;
+            box-shadow: 0px 8px 20px rgba(255, 42, 95, 0.2);
+        }
+
+        .widget-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .widget-info {
+            padding: 15px;
+        }
+
+        .widget-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .widget-info p {
+            font-size: 0.9rem;
+            color: #a0a0ab;
+            line-height: 1.4;
+        }
+
+        /* DETAIL PAGE */
+        .back-btn {
+            background: transparent;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            padding: 8px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .back-btn:hover {
+            background: #ffffff;
+            color: #0b0b0d;
+        }
+
+        .detail-wrapper {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            background: #15151c;
+            border: 2px solid #ffffff;
+            padding: 30px;
+            box-shadow: 8px 8px 0px #ff2a5f;
+        }
+
+        .detail-img {
+            max-width: 400px;
+            width: 100%;
+            border: 2px solid #ffffff;
+            object-fit: cover;
+        }
+
+        .detail-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .detail-tag {
+            display: inline-block;
+            background: #ff2a5f;
+            color: #ffffff;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .detail-content h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .section-heading {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #00e5ff;
+            margin-top: 20px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .detail-content p {
+            line-height: 1.6;
+            color: #d1d1d6;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo" onclick="showPage('home')">MANGA//SYNERGY</div>
+        <div class="nav-links">
+            <button class="nav-btn" onclick="showPage('home')">Home</button>
+            <button class="nav-btn" onclick="showPage('duos')">Duos</button>
+            <button class="nav-btn" onclick="showPage('trios')">Trios</button>
+        </div>
+    </nav>
+
+    <!-- PAGE 1: HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <h1>POWER OF BONDS</h1>
+            <p>
+                In the world of dark manga and battle shonen, strength is rarely built in isolation. Whether bound by tragic fates, eternal rivalries, or unspoken brotherhood, duos and trios define the emotional weight and iconic battles of anime history.
+            </p>
+            
+            <div class="selection-container">
+                <div class="selection-card" onclick="showPage('duos')">
+                    <h2>THE DUOS</h2>
+                    <p>Two forces balancing light and shadow, rivalry, or absolute trust. Click to explore.</p>
+                </div>
+                <div class="selection-card" onclick="showPage('trios')">
+                    <h2>THE TRIOS</h2>
+                    <p>Chaos, brotherhood, and dynamic balance. Click to explore legendary trios.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: DUOS LIST -->
+    <div id="duos" class="page">
+        <h1 class="page-title">ICONIC MANGA DUOS</h1>
+        <p class="page-subtitle">Click on any duo to read about their dynamic and bond.</p>
+        <div class="grid-container" id="duos-grid"></div>
+    </div>
+
+    <!-- PAGE 3: TRIOS LIST -->
+    <div id="trios" class="page">
+        <h1 class="page-title">LEGENDARY MANGA TRIOS</h1>
+        <p class="page-subtitle">Click on any trio to explore their story and synergy.</p>
+        <div class="grid-container" id="trios-grid"></div>
+    </div>
+
+    <!-- PAGE 4: DETAIL PAGE -->
+    <div id="detail" class="page">
+        <button class="back-btn" onclick="goBack()">← Back</button>
+        <div class="detail-wrapper" id="detail-content"></div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const cardsData = [
+            // DUOS
+            {
+                id: 'luffy-zoro',
+                type: 'duo',
+                title: 'Luffy & Zoro',
+                series: 'One Piece',
+                image: '13909.jpg',
+                summary: 'The Captain and his First Mate—an unbreakable bond of absolute loyalty.',
+                relationship: 'Zoro was the first member to join Luffy. Their relationship is built on absolute trust. Zoro is willing to take on all of Luffy\'s pain to preserve his captain\'s dream, while Luffy trusts Zoro implicitly.',
+                whySpecial: 'They represent absolute dedication without question. Zoro aims to be the Greatest Swordsman, and Luffy the Pirate King.'
+            },
+            {
+                id: 'naruto-sasuke',
+                type: 'duo',
+                title: 'Naruto & Sasuke',
+                series: 'Naruto',
+                image: '13910.jpg',
+                summary: 'The definitive rivalry between light and darkness across generations.',
+                relationship: 'Starting as rivals and teammates, their shared loneliness created an eternal bond. Even when Sasuke walked into darkness, Naruto refused to give up on him.',
+                whySpecial: 'Their dual ideologies balance the entire shinobi world—Naruto representing hope and unity, Sasuke representing solitude and sacrifice.'
+            },
+            {
+                id: 'gon-killua',
+                type: 'duo',
+                title: 'Gon & Killua',
+                series: 'Hunter x Hunter',
+                image: '13911.jpg',
+                summary: 'Light and shadow—a bright hunter and a trained assassin.',
+                relationship: 'Killua, raised in a cold family of killers, finds genuine warmth through Gon. Gon relies heavily on Killua\'s strategy and protective nature.',
+                whySpecial: 'Their relationship evolves deeply over time, creating one of the most emotional friendships in manga history.'
+            },
+            {
+                id: 'goku-vegeta',
+                type: 'duo',
+                title: 'Goku & Vegeta',
+                series: 'Dragon Ball',
+                image: '13912.jpg',
+                summary: 'Saiyan rivals who constantly break godlike boundaries together.',
+                relationship: 'From mortal enemies to brothers-in-arms, Vegeta\'s pride constantly collides with Goku\'s obsession with breaking limits.',
+                whySpecial: 'They set the benchmark for anime rivalries. Their continuous push forces both to reach godlike transformations.'
+            },
+            {
+                id: 'itadori-todo',
+                type: 'duo',
+                title: 'Itadori & Todo',
+                series: 'Jujutsu Kaisen',
+                image: '13913.jpg',
+                summary: 'Self-proclaimed brothers whose combat rhythm is unmatched.',
+                relationship: 'Bonding instantly, Todo adopted Yuji as his brother. On the battlefield, Todo\'s tactical mind unlocks Yuji\'s ultimate physical potential.',
+                whySpecial: 'Their Boogie Woogie synchronization provides incredible team combat moments.'
+            },
+
+            // TRIOS
+            {
+                id: 'hayakawa-family',
+                type: 'trio',
+                title: 'Aki, Denji & Power',
+                series: 'Chainsaw Man',
+                image: '13917.jpg',
+                summary: 'A tragic, chaotic family unit living together under Public Safety.',
+                relationship: 'Initially hating each other, Aki takes on the burden of caring for the devil hybrids Denji and Power, eventually growing into a true family.',
+                whySpecial: 'Their quiet domestic moments contrast deeply with the horrific dark fantasy world surrounding them.'
+            },
+            {
+                id: 'karasuno-trio',
+                type: 'trio',
+                title: 'Hinata, Kageyama & Tsukishima',
+                series: 'Haikyu!!',
+                image: '13916.jpg',
+                summary: 'First-years who drive Karasuno\'s volleyball evolution through intense rivalry.',
+                relationship: 'Kageyama\'s precision setter skills feed Hinata\'s speed, while Tsukishima provides the calculated defensive blocking.',
+                whySpecial: 'Their contrasting personalities force each other to mature into elite athletes.'
+            },
+            {
+                id: 'kamaboko-squad',
+                type: 'trio',
+                title: 'Tanjiro, Zenitsu & Inosuke',
+                series: 'Demon Slayer',
+                image: '13915.jpg',
+                summary: 'Demon Slayers who fight together through sheer willpower and heart.',
+                relationship: 'Tanjiro acts as the moral center, keeping Inosuke\'s wild instincts and Zenitsu\'s fear balanced during battle.',
+                whySpecial: 'They represent brotherhood through survival, facing horrific demons together.'
+            },
+            {
+                id: 'origin-trio',
+                type: 'trio',
+                title: 'Deku, Bakugo & Todoroki',
+                series: 'My Hero Academia',
+                image: '13914.jpg',
+                summary: 'The top three UA students destined to lead hero society.',
+                relationship: 'Overcoming personal trauma and childhood struggles, these three continually push each other to master their powers.',
+                whySpecial: 'They represent three unique paths to becoming the world\'s greatest hero.'
+            }
+        ];
+
+        let lastPage = 'home';
+
+        function renderCards() {
+            const duosContainer = document.getElementById('duos-grid');
+            const triosContainer = document.getElementById('trios-grid');
+
+            duosContainer.innerHTML = '';
+            triosContainer.innerHTML = '';
+
+            cardsData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'widget-card';
+                card.onclick = () => openDetail(item.id);
+
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="widget-info">
+                        <h3>${item.title}</h3>
+                        <p>${item.summary}</p>
+                    </div>
+                `;
+
+                if (item.type === 'duo') {
+                    duosContainer.appendChild(card);
+                } else {
+                    triosContainer.appendChild(card);
+                }
+            });
+        }
+
+        function showPage(pageId) {
+            const currentPage = document.querySelector('.page.active');
+            if (currentPage && currentPage.id !== 'detail') {
+                lastPage = currentPage.id;
+            }
+
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goBack() {
+            showPage(lastPage);
+        }
+
+        function openDetail(id) {
+            const item = cardsData.find(c => c.id === id);
+            if (!item) return;
+
+            const detailContainer = document.getElementById('detail-content');
+            detailContainer.innerHTML = `
+                <img src="${item.image}" alt="${item.title}" class="detail-img">
+                <div class="detail-content">
+                    <span class="detail-tag">${item.series} • ${item.type}</span>
+                    <h2>${item.title}</h2>
+                    
+                    <div class="section-heading">Relationship Dynamic</div>
+                    <p>${item.relationship}</p>
+                    
+                    <div class="section-heading">Why They Are Special</div>
+                    <p>${item.whySpecial}</p>
+                </div>
+            `;
+
+            showPage('detail');
+        }
+
+        // Initialize grid on startup
+        renderCards();
+    </script>
+</body>
+</html>
